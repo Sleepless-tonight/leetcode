@@ -1,4 +1,4 @@
-package com.savload;
+package com.savload.leetcode;
 
 import java.util.ArrayList;
 
