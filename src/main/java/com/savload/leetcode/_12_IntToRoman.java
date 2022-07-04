@@ -6,10 +6,10 @@ package com.savload.leetcode;
  * @Date 2022/06/30 18:01
  * @Description 整数转罗马数字
  */
-public class IntToRoman {
+public class _12_IntToRoman {
     public static void main(String[] args) {
-        int num = 10;
-        System.out.println(new IntToRoman().intToRoman(num));
+        int num = 1994;
+        System.out.println(new _12_IntToRoman().intToRoman(num));
     }
 
     /**
@@ -33,7 +33,7 @@ public class IntToRoman {
      * 来源：力扣（LeetCode）
      * 链接：https://leetcode.cn/problems/integer-to-roman
      * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
-     *
+     * <p>
      * 输入: num = 1994
      * 输出: "MCMXCIV"
      * 解释: M = 1000, CM = 900, XC = 90, IV = 4.
@@ -42,50 +42,45 @@ public class IntToRoman {
      * @return
      */
     public String intToRoman(int num) {
-        String s = null;
-        StringBuilder stringBuilder = new StringBuilder();
+        String s = "";
 
-        String[] strings = {"I","V","X","L","C","D","M"};
+        String[] strings = {"I", "V", "X", "L", "C", "D", "M"};
         int a = 0;
         while (true) {
+            StringBuilder stringBuilder = new StringBuilder();
+
             int i = num / 10;
             int i1 = num % 10;
-            if (i > 0) {
-                num = i;
-                if (i1 != 0) {
-                    if (a == 0) {
 
-                        if (i1 < 4) {
-                            for (int j = 0; j < i1; j++) {
-                                stringBuilder.append("I");
-                            }
-                        } else if (i1 == 4) {
-                            stringBuilder.append("IV");
+            if (i1 != 0) {
 
-                        } else if (i1 == 5) {
-                            stringBuilder.append("V");
+                if (i1 < 4) {
+                    for (int j = 0; j < i1; j++) {
+                        stringBuilder.append(strings[a]);
+                    }
+                } else if (i1 == 4) {
+                    stringBuilder.append(strings[a]);
+                    stringBuilder.append(strings[a+1]);
 
-                        } else if (i1 == 9) {
-                            stringBuilder.append("IX");
-                        } else {
-                            stringBuilder.append("V");
-                            for (int j = 0; j < i1 - 5; j++) {
-                                stringBuilder.append("I");
-                            }
-                        }
-
-
-                    } else if (a == 1) {
-
-                    } else if (a == 2) {
-
-                    } else if (a == 3) {
-
-                    } else if (a == 4) {
-
+                } else if (i1 == 5) {
+                    stringBuilder.append(strings[a+1]);
+                } else if (i1 == 9) {
+                    stringBuilder.append(strings[a]);
+                    stringBuilder.append(strings[a+2]);
+                } else {
+                    stringBuilder.append(strings[a+1]);
+                    for (int j = 0; j < i1 - 5; j++) {
+                        stringBuilder.append(strings[a]);
                     }
                 }
-                a++;
+
+            }
+
+            a+=2;
+            s = stringBuilder.toString() + s;
+
+            if (i > 0) {
+                num = i;
             } else {
                 break;
             }
